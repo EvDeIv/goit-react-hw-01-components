@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./TransactionHistory.module.css";
+import TransactionItem from "./TransactionItem";
 
 export default function TransactionHistory({ items }) {
   return (
@@ -17,9 +18,7 @@ export default function TransactionHistory({ items }) {
         <tbody className={styles.tbody}>
           {items.map((item) => (
             <tr className={styles.tr} key={item.id}>
-              <td className={styles.td}>{item.type}</td>
-              <td className={styles.td}>{item.amount}</td>
-              <td className={styles.td}>{item.currency}</td>
+              <TransactionItem item={item} />
             </tr>
           ))}
         </tbody>
@@ -30,10 +29,7 @@ export default function TransactionHistory({ items }) {
 
 TransactionHistory.propTypes = {
   items: PropTypes.arrayOf(
-    PropTypes.exact({
-      type: PropTypes.string.isRequired,
-      amount: PropTypes.string.isRequired,
-      currency: PropTypes.string.isRequired,
+    PropTypes.shape({
       id: PropTypes.string.isRequired,
     })
   ),
